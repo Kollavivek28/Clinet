@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Daddy!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #fde2e4, #fef6e4);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('birthday-bg.png') center/cover no-repeat;
+      opacity: 0.08; /* Optional background image */
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5em;
+      color: #cc3366;
+      margin-top: 30px;
+    }
+
+    .photo {
+      margin: 20px 0;
+    }
+
+    .photo img {
+      width: 50vw;
+      max-width: 200px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid #ffb3c6;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    #typedText {
+      font-size: 1.5em;
+      margin: 20px auto;
+      max-width: 700px;
+      padding: 0 20px;
+    }
+
+    button {
+      background-color: #ff99aa;
+      color: white;
+      font-size: 1.2em;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #e65c7d;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: white;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      border-radius: 15px;
+      z-index: 999;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.4s ease-in-out;
+    }
+
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .popup h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #cc3366;
+      margin-bottom: 15px;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ffc0cb;
+      animation: float 8s infinite ease-in-out;
+      opacity: 0.5;
+      transform: rotate(45deg);
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ffc0cb;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happy Birthday Daddy! 🎉</h1>
+
+  <div class="photo">
+    <img src="dad.jpg" alt="Dad's Photo" />
+  </div>
+
+  <div id="typedText"></div>
+
+  <button onclick="showPopup()">Click for a surprise!</button>
+  <button onclick="document.getElementById('bgMusic').play()">🎵 Play Music</button>
+
+  <div class="popup" id="popup">
+    <h2>🎂 You are the world's best Dad! 🎂</h2>
+    <p>Wishing you joy, health, and endless love on your special day! 💕</p>
+  </div>
+
+  <audio autoplay loop id="bgMusic">
+    <source src="happy.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function showPopup() {
+      document.getElementById('popup').classList.add('active');
+    }
+
+    // Floating hearts
+    for (let i = 0; i < 25; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+    }
+
+    // Typewriter effect
+    const message = "Dear Dad, thank you for always being my guide, my strength, and my inspiration. You are my hero. I love you so much. Happy Birthday! 💖";
+    const textBox = document.getElementById("typedText");
+    let index = 0;
+
+    function typeWriter() {
+      if (index < message.length) {
+        textBox.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+    typeWriter();
+  </script>
+</body>
+</html>
